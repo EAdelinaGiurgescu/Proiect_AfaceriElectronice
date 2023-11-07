@@ -1,0 +1,9 @@
+﻿@model ArticoleVM
+
+@{
+    ViewData["Title"] = "Edit a articol";
+}
+
+@{ ViewBag.IsNew = false;}
+
+@await Html.PartialAsync(@"../Shared/Components/_Articole.cshtml")

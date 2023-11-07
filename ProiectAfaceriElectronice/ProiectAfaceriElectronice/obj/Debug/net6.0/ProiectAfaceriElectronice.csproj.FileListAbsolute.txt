@@ -1,0 +1,7 @@
+C:\Users\Ade\source\repos\ProiectAfaceriElectronice\ProiectAfaceriElectronice\obj\Debug\net6.0\ProiectAfaceriElectronice.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ade\source\repos\ProiectAfaceriElectronice\ProiectAfaceriElectronice\obj\Debug\net6.0\ProiectAfaceriElectronice.AssemblyInfoInputs.cache
+C:\Users\Ade\source\repos\ProiectAfaceriElectronice\ProiectAfaceriElectronice\obj\Debug\net6.0\ProiectAfaceriElectronice.AssemblyInfo.cs
+C:\Users\Ade\source\repos\ProiectAfaceriElectronice\ProiectAfaceriElectronice\obj\Debug\net6.0\ProiectAfaceriElectronice.csproj.CoreCompileInputs.cache
+C:\Users\Ade\source\repos\ProiectAfaceriElectronice\ProiectAfaceriElectronice\obj\Debug\net6.0\ProiectAfaceriElectronice.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Ade\source\repos\ProiectAfaceriElectronice\ProiectAfaceriElectronice\obj\Debug\net6.0\ProiectAfaceriElectronice.RazorAssemblyInfo.cache
+C:\Users\Ade\source\repos\ProiectAfaceriElectronice\ProiectAfaceriElectronice\obj\Debug\net6.0\ProiectAfaceriElectronice.RazorAssemblyInfo.cs

@@ -1,0 +1,9 @@
+﻿@model ArticoleVM
+
+@{
+    ViewData["Title"] = "Create a articol";
+}
+
+@{ ViewBag.IsNew = true;}
+
+@await Html.PartialAsync(@"../Shared/Components/_Articole.cshtml")

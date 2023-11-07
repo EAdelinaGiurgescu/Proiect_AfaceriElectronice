@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ArticoleVM>
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Shopping Cart";
+}
+
+<table id="table" class="table table-hover table-striped table-dark">
+    <thead>
+        <tr>
+            <th hidden>Product Id</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Size</th>
+            <th>Color</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            bool isInBag = false;
+            var lstCart = HttpContextAccessor.HttpContext.Session.Get<List<int>>(SessionHelper.ShoppingCart);
+            if (lstCart != null && lstCart.Contains(item.Id))
+                isInBag = true;
+
+            var route = isInBag ? "../Articole/Remove/{0}" : "Add/{0}";
+            route = string.Format(route, item.Id);
+
+            if (isInBag)
+            {
+                <tr id="@item.Id">
+                    <td hidden>@item.Id</td>
+                    <td><img style="width: 300px; height: 150px;" src="~/@item.ImagePath" alt="nu exista imagine momentan" /></td>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@item.Price</td>
+                    <td>@item.Size</td>
+                    <td>@item.Color</td>
+                    <td>
+                        <a href="@string.Format(route, item.Id)" class="btn btn-danger form-control">Remove from basket</a>
+                    </td>
+                </tr>
+            }
+        }
+
+    </tbody>
+
+</table>
+
+<a class="btn btn-primary" href="/Home/PaymentWithPayPal"> Pay Now</a>

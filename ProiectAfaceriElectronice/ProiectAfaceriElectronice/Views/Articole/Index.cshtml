@@ -1,0 +1,89 @@
+﻿@model IEnumerable<ArticoleVM>
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Articole";
+    bool isUserAuth = (HttpContextAccessor.HttpContext.User != null) && (HttpContextAccessor.HttpContext.User.Identity != null) && HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated;
+}
+
+
+<div class="row mb-2 mt-2 operationsButtons">
+    <div class="col-md-12">
+        <a href="/Articole/New" class="btn btn-new btn-outline-new font-weight-bold mr-2" data-toggle="tooltip" title="New" data-placement="top">
+            <span class="fa fa-plus-circle"></span> Add new item
+        </a>
+    </div>
+</div>
+
+<br />
+<br />
+
+<table id="table" class="table table-hover table-striped table-dark">
+    <thead>
+        <tr>
+            <th hidden>Product Id</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Size</th>
+            <th>Color</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            if (item.IsAvailable || isUserAuth)
+            {
+                <tr id="@item.Id">
+                    <td hidden>@item.Id</td>
+                    <td><img style="width: 300px; height: 150px;" src="~/@item.ImagePath" alt="nu exista imagine momentan" /></td>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@item.Price</td>
+                    <td>@item.Size</td>
+                    <td>@item.Color</td>
+                    <td>
+                        @if (!isUserAuth)
+                        {
+                            bool isInBag = false;
+                            var lstCart = HttpContextAccessor.HttpContext.Session.Get<List<int>>(SessionHelper.ShoppingCart);
+                            if (lstCart != null && lstCart.Contains(item.Id))
+                                isInBag = true;
+
+                            var route = isInBag ? "Articole/Remove/{0}" : "Articole/Add/{0}";
+                            route = string.Format(route, item.Id);             
+
+                            @if (isInBag)
+                            {
+                                <a href="@string.Format(route, item.Id)" class="btn btn-danger form-control">Remove from basket</a>
+                            }
+                            else
+                            {
+                                <a href="@string.Format(route, item.Id)" class="btn btn-primary form-control">Add to basket</a>
+
+                            }
+                        }
+                        else
+                        {
+                            <button style="background-color: white" class="btn font-weight-bold mr-2" data-toggle="tooltip" title="Edit" data-placement="top" onclick="Articol.onEditBtnPress(@item.Id)">
+                                <span class="fa fa-edit"></span>
+                            </button>
+
+                            <button style="background-color: white"  type="button" class="btn btn-delete btn-outline-delete font-weight-bold mr-2" id="btnDelete" data-toggle="tooltip" data-placement="top" title="Delete" onclick="Articol.onDelete()">
+                                <span class="fa fa-trash"></span>
+                            </button>
+                            
+                        }
+
+
+                    </td>
+                </tr>
+            }
+        }
+
+    </tbody>
+
+</table>
